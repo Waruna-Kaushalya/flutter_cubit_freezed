@@ -154,6 +154,12 @@ class SecondPage extends StatelessWidget {
             //! this method is correct
             BlocBuilder<InternetCubit, InternetState>(
               builder: (context, state) {
+                print("****************************");
+                print(InternetConnectedWiFi == InternetConnectedWiFi);
+                print(InternetConnectedWiFi == InternetDisconnected);
+
+                print("****************************");
+
                 return state.when(
                   netLoading: () => const CircularProgressIndicator(),
                   netConnectedMobile: () =>

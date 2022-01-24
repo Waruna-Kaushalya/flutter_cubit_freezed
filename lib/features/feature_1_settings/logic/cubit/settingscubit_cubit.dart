@@ -1,5 +1,9 @@
 import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'settingscubit_state.dart';
+part 'settingscubit_cubit.freezed.dart';
+part 'settingscubit_cubit.g.dart';
 
 class SettingsCubit extends Cubit<SettingState> with HydratedMixin {
   SettingsCubit()
@@ -18,14 +22,8 @@ class SettingsCubit extends Cubit<SettingState> with HydratedMixin {
 
   @override
   SettingState? fromJson(Map<String, dynamic> json) =>
-      SettingState.fromMap(json);
+      SettingState.fromJson(json);
 
   @override
-  Map<String, dynamic>? toJson(SettingState state) => state.toMap();
-
-  // @override
-  // void onError(Object error, StackTrace stackTrace) {
-  //   throw "Err";
-  //   // super.onError(error, stackTrace);
-  // }
+  Map<String, dynamic>? toJson(SettingState state) => state.toJson();
 }
