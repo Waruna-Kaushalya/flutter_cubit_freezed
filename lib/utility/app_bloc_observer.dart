@@ -1,4 +1,4 @@
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 //An interface for observing the behavior of Bloc instances.
 class AppBlocObserver extends BlocObserver {

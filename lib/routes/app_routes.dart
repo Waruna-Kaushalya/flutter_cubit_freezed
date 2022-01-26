@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc_concepts/features/feature_1_settings/presentation/screens/settings_screen.dart';
 import 'package:flutter_bloc_concepts/features/feature_2_conectivity/presentation/screens/internet_connection_screen.dart';
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/home_screen.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/second_screen.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/third_screen.dart';
 
 class AppRoutes {
   Route? onGenerateRoute(RouteSettings routeSettings) {

@@ -1,4 +1,12 @@
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_concepts/features/feature_1_settings/presentation/screens/settings_screen.dart';
+import 'package:flutter_bloc_concepts/features/feature_2_conectivity/logic/bloc/internet_bloc.dart';
+import 'package:flutter_bloc_concepts/features/feature_2_conectivity/logic/cubit/internet_cubit.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/logic/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_concepts/utility/constants/enums.dart';
+
+import 'package:provider/src/provider.dart';
 
 // class SecondPage extends StatefulWidget {
 //   static const routeName = '/secondpageroute';
@@ -141,9 +149,11 @@ class SecondPage extends StatelessWidget {
             //! this method is wrong
             Builder(
               builder: (context) {
-                if (intenetState is InternetConnectedMobile) {
+                if (intenetState is InternetConnected &&
+                    intenetState.connectionType == ConnectionType.mobile) {
                   return const ConnectionTextWidget(connectionType: "Mobile");
-                } else if (intenetState is InternetConnectedWiFi) {
+                } else if (intenetState is InternetConnected &&
+                    intenetState.connectionType == ConnectionType.wifi) {
                   return const ConnectionTextWidget(connectionType: "WiFi");
                 } else {
                   return const ConnectionTextWidget(
@@ -154,21 +164,25 @@ class SecondPage extends StatelessWidget {
             //! this method is correct
             BlocBuilder<InternetCubit, InternetState>(
               builder: (context, state) {
-                print("****************************");
-                print(InternetConnectedWiFi == InternetConnectedWiFi);
-                print(InternetConnectedWiFi == InternetDisconnected);
-
-                print("****************************");
-
-                return state.when(
-                  netLoading: () => const CircularProgressIndicator(),
-                  netConnectedMobile: () =>
-                      const ConnectionTextWidget(connectionType: "Mobile"),
-                  netConnectedWiFi: () =>
-                      const ConnectionTextWidget(connectionType: "WiFi"),
-                  netDisconnected: () => const ConnectionTextWidget(
-                      connectionType: "Disconnected"),
-                );
+                // return state.when(
+                //   netLoading: () => const CircularProgressIndicator(),
+                //   netConnectedMobile: () =>
+                //       const ConnectionTextWidget(connectionType: "Mobile"),
+                //   netConnectedWiFi: () =>
+                //       const ConnectionTextWidget(connectionType: "WiFi"),
+                //   netDisconnected: () => const ConnectionTextWidget(
+                //       connectionType: "Disconnected"),
+                // );
+                if (intenetState is InternetConnected &&
+                    intenetState.connectionType == ConnectionType.mobile) {
+                  return const ConnectionTextWidget(connectionType: "Mobile");
+                } else if (intenetState is InternetConnected &&
+                    intenetState.connectionType == ConnectionType.wifi) {
+                  return const ConnectionTextWidget(connectionType: "WiFi");
+                } else {
+                  return const ConnectionTextWidget(
+                      connectionType: "Disconnected");
+                }
               },
             ),
 

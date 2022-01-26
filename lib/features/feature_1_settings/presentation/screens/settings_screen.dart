@@ -1,4 +1,6 @@
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_concepts/features/feature_1_settings/logic/cubit/settingscubit_cubit.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settingsscreenroute';

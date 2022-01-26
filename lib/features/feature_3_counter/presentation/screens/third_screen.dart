@@ -1,4 +1,8 @@
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_concepts/features/feature_1_settings/presentation/screens/settings_screen.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/logic/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/second_screen.dart';
 
 class ThirddPage extends StatefulWidget {
   static const routeName = '/thridpageroute';

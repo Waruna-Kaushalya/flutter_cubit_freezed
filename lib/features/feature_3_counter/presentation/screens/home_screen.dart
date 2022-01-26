@@ -1,5 +1,17 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_concepts/features/feature_1_settings/presentation/screens/settings_screen.dart';
+
+import 'package:flutter_bloc_concepts/features/feature_2_conectivity/logic/cubit/internet_cubit.dart';
 import 'package:flutter_bloc_concepts/features/feature_2_conectivity/presentation/screens/internet_connection_screen.dart';
-import 'package:flutter_bloc_concepts/utility/exports.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/logic/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/second_screen.dart';
+import 'package:flutter_bloc_concepts/features/feature_3_counter/presentation/screens/third_screen.dart';
+import 'package:flutter_bloc_concepts/utility/constants/enums.dart';
+//
 
 class MyHomePage extends StatefulWidget {
   static const routeName = '/homeroute';
@@ -10,17 +22,18 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final abc = "sdsdv";
   Connectivity connectivity = Connectivity();
   final InternetCubit internetCubit =
       InternetCubit(connectivity: Connectivity());
   late StreamSubscription connectivityStreamSubscription;
-
+  late AnimationController controller;
   @override
   void initState() {
     checkkk();
-
+    controller = BottomSheet.createAnimationController(this);
+    controller.duration = const Duration(seconds: 1);
     super.initState();
   }
 
@@ -124,33 +137,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, connectionState) =>
                     BlocBuilder<CounterCubit, CounterState>(
                   builder: (context, counterState) {
-                    return connectionState.when(
-                      netLoading: () => const CircularProgressIndicator(),
-                      netConnectedMobile: () => CounterAndNetLabel(
-                          counterState: counterState, internetType: "Mobile"),
-                      netConnectedWiFi: () => CounterAndNetLabel(
-                          counterState: counterState, internetType: "WiFi"),
-                      netDisconnected: () => const Text("Disconnected"),
-                    );
-                    // if (connectionState is InternetConnected &&
-                    //     connectionState.connectionType ==
-                    //         ConnectionType.mobile) {
-                    //   return CounterAndNetLabel(
-                    //     counterState: counterState,
-                    //     internetType: 'Mobile',
-                    //   );
-                    // } else if (connectionState is InternetConnected &&
-                    //     connectionState.connectionType == ConnectionType.wifi) {
-                    //   return CounterAndNetLabel(
-                    //     counterState: counterState,
-                    //     internetType: 'WiFi',
-                    //   );
-                    // } else {
-                    //   return CounterAndNetLabel(
-                    //     counterState: counterState,
-                    //     internetType: 'Disconnected',
-                    //   );
-                    // }
+                    // return connectionState.when(
+                    //   netLoading: () => const CircularProgressIndicator(),
+                    //   netConnectedMobile: () => CounterAndNetLabel(
+                    //       counterState: counterState, internetType: "Mobile"),
+                    //   netConnectedWiFi: () => CounterAndNetLabel(
+                    //       counterState: counterState, internetType: "WiFi"),
+                    //   netDisconnected: () => const Text("Disconnected"),
+                    // );
+                    if (connectionState is InternetConnected &&
+                        connectionState.connectionType ==
+                            ConnectionType.mobile) {
+                      return CounterAndNetLabel(
+                        counterState: counterState,
+                        internetType: 'Mobile',
+                      );
+                    } else if (connectionState is InternetConnected &&
+                        connectionState.connectionType == ConnectionType.wifi) {
+                      return CounterAndNetLabel(
+                        counterState: counterState,
+                        internetType: 'WiFi',
+                      );
+                    } else {
+                      return CounterAndNetLabel(
+                        counterState: counterState,
+                        internetType: 'Disconnected',
+                      );
+                    }
                   },
                 ),
               ),
@@ -268,6 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> showModel(BuildContext context) {
     return showModalBottomSheet<void>(
+      transitionAnimationController: controller,
       context: context,
       builder: (BuildContext context) {
         return Container(

@@ -1,11 +1,42 @@
 part of 'settingscubit_cubit.dart';
 
-@freezed
-class SettingState with _$SettingState {
-  const factory SettingState(
-      {required bool appNotification,
-      required bool emailNotification}) = _SettingState;
+class SettingState extends Equatable {
+  final bool appNotification;
+  final bool emailNotification;
 
-  factory SettingState.fromJson(Map<String, dynamic> json) =>
-      _$SettingStateFromJson(json);
+  const SettingState({
+    required this.appNotification,
+    required this.emailNotification,
+  });
+
+  SettingState copyWith({
+    bool? appNotification,
+    bool? emailNotification,
+  }) {
+    return SettingState(
+      appNotification: appNotification ?? this.appNotification,
+      emailNotification: emailNotification ?? this.emailNotification,
+    );
+  }
+
+  @override
+  List<Object?> get props => [appNotification, emailNotification];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'appNotification': appNotification,
+      'emailNotification': emailNotification,
+    };
+  }
+
+  factory SettingState.fromMap(Map<String, dynamic> map) {
+    return SettingState(
+      appNotification: map['appNotification'],
+      emailNotification: map['emailNotification'],
+    );
+  }
+
+  @override
+  String toString() =>
+      'SettingState(appNotification: $appNotification, emailNotification: $emailNotification)';
 }
