@@ -16,7 +16,6 @@ class ThirddPage extends StatefulWidget {
 class _ThirddPageState extends State<ThirddPage> {
   @override
   void dispose() {
-    print("++++++++++++++++++++++++++++++++++++++++++++++");
     super.dispose();
   }
 

@@ -320,7 +320,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   child: const Text('Close')),
               TextButton(
                 onPressed: () {
-                  print('HelloWorld!');
                   Navigator.pop(context);
                 },
                 child: const Text('HelloWorld!'),

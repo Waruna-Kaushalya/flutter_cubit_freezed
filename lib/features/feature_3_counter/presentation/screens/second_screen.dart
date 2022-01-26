@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_concepts/features/feature_1_settings/presentation/screens/settings_screen.dart';
-import 'package:flutter_bloc_concepts/features/feature_2_conectivity/logic/bloc/internet_bloc.dart';
+
 import 'package:flutter_bloc_concepts/features/feature_2_conectivity/logic/cubit/internet_cubit.dart';
 import 'package:flutter_bloc_concepts/features/feature_3_counter/logic/cubit/counter_cubit.dart';
 import 'package:flutter_bloc_concepts/utility/constants/enums.dart';
-
-import 'package:provider/src/provider.dart';
 
 // class SecondPage extends StatefulWidget {
 //   static const routeName = '/secondpageroute';
